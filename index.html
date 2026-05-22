@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Replify — Automatiza las respuestas de WhatsApp de tu negocio con IA. Atiende a tus clientes 24/7 sin perder ni una venta."/>
+  <title>Replify — IA para WhatsApp Business</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235888FF'/><text y='.9em' font-size='70' x='12'>💬</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--blue:#5888FF;--blue-dark:#3956FF;--blue-light:#EEF3FF;--green:#25D366;--green-dark:#128C7E;--green-light:#DCFCE7;--dark:#0F2A51;--gray:#6B7280;--gray-light:#F8FAFC;--border:#E5E7EB;--white:#fff;--text:#111827;--gold:#F59E0B;--gold-light:#FEF3C7}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    a{text-decoration:none;color:inherit}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:68px;padding:0 24px;gap:20px}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif}
+    .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:.95rem}
+    .nav-links{display:flex;gap:4px;margin-left:16px}
+    .nav-links a{font-size:.84rem;font-weight:600;color:var(--gray);padding:7px 12px;border-radius:8px;transition:all .2s}
+    .nav-links a:hover{background:var(--blue-light);color:var(--blue)}
+    .nav-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn-sm{padding:8px 16px;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all .2s;text-decoration:none;display:inline-block}
+    .btn-ghost{border:1.5px solid var(--border);background:none;color:var(--text)}
+    .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+    .btn-fill{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white}
+    .btn-fill:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(88,136,255,.35)}
+    @media(max-width:768px){.nav-links{display:none}}
+
+    /* HERO */
+    .hero{padding:130px 0 90px;background:linear-gradient(145deg,#0F2A51 0%,#1A3A6E 50%,#163060 100%);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-100px;right:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(37,211,102,.12),transparent 65%)}
+    .hero::after{content:'';position:absolute;bottom:-120px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(88,136,255,.15),transparent 65%)}
+    .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+    @media(max-width:900px){.hero-inner{grid-template-columns:1fr;text-align:center}}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);color:#4ADE80;font-size:.75rem;font-weight:800;padding:6px 14px;border-radius:20px;margin-bottom:22px}
+    .hero h1{font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:900;color:white;font-family:'Poppins',sans-serif;line-height:1.1;margin-bottom:20px}
+    .hero h1 span{background:linear-gradient(135deg,#86EFAC,#25D366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:32px;max-width:480px}
+    @media(max-width:900px){.hero-sub{margin:0 auto 32px}}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+    @media(max-width:900px){.hero-cta{justify-content:center}}
+    .btn-green{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:14px;background:linear-gradient(135deg,#25D366,#128C7E);color:white;font-size:.98rem;font-weight:800;border:none;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none}
+    .btn-green:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.4)}
+    .btn-outline-white{display:inline-flex;align-items:center;gap:8px;padding:15px 24px;border-radius:14px;background:transparent;color:rgba(255,255,255,.75);font-size:.92rem;font-weight:700;border:1.5px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none}
+    .btn-outline-white:hover{border-color:white;color:white}
+    .hero-trust{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    @media(max-width:900px){.hero-trust{justify-content:center}}
+    .trust-avatars{display:flex}
+    .trust-avatars span{width:32px;height:32px;border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:white;margin-left:-8px}
+    .trust-avatars span:first-child{margin-left:0}
+    .trust-text{font-size:.78rem;color:rgba(255,255,255,.5)}
+    .trust-text strong{color:rgba(255,255,255,.85)}
+
+    /* MOCKUP */
+    .hero-visual{display:flex;justify-content:center;align-items:center}
+    @media(max-width:900px){.hero-visual{margin-top:40px}}
+    .phone-frame{width:280px;background:#1A1A2E;border-radius:36px;padding:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.08);position:relative}
+    .phone-screen{background:#ECE5DD;border-radius:24px;overflow:hidden;min-height:480px}
+    .wa-header{background:#075E54;padding:12px 16px;display:flex;align-items:center;gap:10px}
+    .wa-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:white}
+    .wa-info{flex:1}
+    .wa-name{font-size:.78rem;font-weight:700;color:white;line-height:1}
+    .wa-status{font-size:.65rem;color:rgba(255,255,255,.6);margin-top:2px}
+    .wa-body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .wa-msg{max-width:85%;padding:8px 12px;border-radius:10px;font-size:.72rem;line-height:1.5;position:relative}
+    .wa-msg.in{background:white;border-radius:0 10px 10px 10px;align-self:flex-start;color:#111}
+    .wa-msg.out{background:#DCF8C6;border-radius:10px 0 10px 10px;align-self:flex-end;color:#111}
+    .wa-time{font-size:.6rem;color:rgba(0,0,0,.35);margin-top:2px;text-align:right}
+    .wa-typing{display:flex;align-items:center;gap:6px;padding:8px 12px;background:white;border-radius:0 10px 10px 10px;align-self:flex-start;max-width:60px}
+    .wa-typing span{width:7px;height:7px;border-radius:50%;background:#999;animation:bounce .8s infinite}
+    .wa-typing span:nth-child(2){animation-delay:.15s}
+    .wa-typing span:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+    .ai-badge{position:absolute;bottom:-10px;right:-10px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white;font-size:.62rem;font-weight:800;padding:5px 10px;border-radius:20px;box-shadow:0 4px 12px rgba(88,136,255,.4)}
+
+    /* BRANDS */
+    .brands{padding:44px 0;border-bottom:1px solid var(--border)}
+    .brands-label{text-align:center;font-size:.78rem;color:var(--gray);margin-bottom:20px;font-weight:600}
+    .brands-row{display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap;opacity:.45}
+    .brand-item{font-size:.95rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;white-space:nowrap}
+
+    /* FEATURES */
+    .features{padding:90px 0}
+    .section-tag{display:inline-flex;align-items:center;gap:5px;background:var(--blue-light);color:var(--blue-dark);font-size:.72rem;font-weight:800;padding:5px 12px;border-radius:20px;margin-bottom:12px}
+    .section-title{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;line-height:1.2;margin-bottom:10px}
+    .section-sub{font-size:.92rem;color:var(--gray);line-height:1.8}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
+    @media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+    .feat-card{background:white;border:1.5px solid var(--border);border-radius:18px;padding:26px;transition:all .25s}
+    .feat-card:hover{border-color:var(--blue);box-shadow:0 8px 28px rgba(88,136,255,.1);transform:translateY(-3px)}
+    .feat-icon{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
+    .feat-icon.green{background:var(--green-light)}
+    .feat-icon.blue{background:var(--blue-light)}
+    .feat-icon.gold{background:var(--gold-light)}
+    .feat-title{font-size:.95rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;margin-bottom:8px}
+    .feat-desc{font-size:.82rem;color:var(--gray);line-height:1.7}
+
+    /* STATS */
+    .stats{padding:72px 0;background:linear-gradient(135deg,#0F2A51,#1A3A6E)}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+    @media(max-width:768px){.stats-grid{grid-template-columns:1fr 1fr}}
+    .stat-val{font-size:2.8rem;font-weight:900;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#86EFAC,#25D366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px}
+    .stat-label{font-size:.8rem;color:rgba(255,255,255,.45);line-height:1.5}
+
+    /* USE CASES */
+    .use-cases{padding:90px 0;background:var(--gray-light)}
+    .uc-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;margin-top:36px}
+    .uc-tab{padding:8px 18px;border-radius:20px;font-size:.82rem;font-weight:700;border:1.5px solid var(--border);background:white;color:var(--gray);cursor:pointer;transition:all .2s;font-family:inherit}
+    .uc-tab.active,.uc-tab:hover{background:var(--blue);color:white;border-color:var(--blue)}
+    .uc-content{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;max-width:960px;margin:0 auto}
+    @media(max-width:768px){.uc-content{grid-template-columns:1fr}}
+    .uc-list{display:flex;flex-direction:column;gap:16px}
+    .uc-item{display:flex;gap:14px;align-items:flex-start}
+    .uc-icon{width:40px;height:40px;border-radius:11px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:2px}
+    .uc-text h4{font-size:.9rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;margin-bottom:4px}
+    .uc-text p{font-size:.8rem;color:var(--gray);line-height:1.65}
+    .uc-visual{background:white;border:1.5px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 8px 32px rgba(0,0,0,.06)}
+    .conv-bubble{display:flex;flex-direction:column;gap:10px}
+    .cb{padding:10px 14px;border-radius:12px;font-size:.78rem;line-height:1.6;max-width:88%}
+    .cb.user{background:#DCF8C6;align-self:flex-end;color:#111;border-radius:12px 0 12px 12px}
+    .cb.bot{background:var(--blue-light);align-self:flex-start;color:var(--dark);border-radius:0 12px 12px 12px}
+    .cb-label{font-size:.65rem;font-weight:700;margin-bottom:3px;opacity:.5}
+
+    /* TESTIMONIALS */
+    .testimonials{padding:90px 0}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+    @media(max-width:900px){.test-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.test-grid{grid-template-columns:1fr}}
+    .test-card{background:white;border:1.5px solid var(--border);border-radius:18px;padding:24px;transition:all .2s}
+    .test-card:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(88,136,255,.08)}
+    .test-stars{color:#F59E0B;font-size:.85rem;margin-bottom:12px}
+    .test-text{font-size:.84rem;color:var(--gray);line-height:1.75;margin-bottom:18px;font-style:italic}
+    .test-author{display:flex;align-items:center;gap:10px}
+    .test-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:white;flex-shrink:0}
+    .test-name{font-size:.84rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif}
+    .test-role{font-size:.74rem;color:var(--gray)}
+
+    /* CTA FINAL */
+    .cta-final{padding:90px 0;text-align:center;background:linear-gradient(145deg,#0F2A51 0%,#1A3A6E 55%,#2D5A9E 100%);position:relative;overflow:hidden}
+    .cta-final::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(ellipse,rgba(37,211,102,.08),transparent 60%)}
+    .cta-final h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;color:white;font-family:'Poppins',sans-serif;margin-bottom:14px;position:relative;z-index:1}
+    .cta-final h2 span{background:linear-gradient(135deg,#86EFAC,#25D366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .cta-final p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:32px;line-height:1.8;max-width:500px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+    .cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+    .cta-note{font-size:.76rem;color:rgba(255,255,255,.3);margin-top:14px;position:relative;z-index:1}
+
+    /* FOOTER */
+    footer{background:#0A1E3D;padding:52px 0 28px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+    @media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+    .footer-brand{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:900;color:white;font-family:'Poppins',sans-serif;margin-bottom:12px}
+    .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.35);line-height:1.7;max-width:240px}
+    .footer-col h4{font-size:.8rem;font-weight:800;color:rgba(255,255,255,.6);margin-bottom:14px;text-transform:uppercase;letter-spacing:.07em}
+    .footer-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:9px;transition:color .2s;text-decoration:none}
+    .footer-col a:hover{color:white}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .footer-copy{font-size:.74rem;color:rgba(255,255,255,.2)}
+    .footer-badges{display:flex;gap:10px;flex-wrap:wrap}
+    .f-badge{font-size:.68rem;background:rgba(255,255,255,.07);color:rgba(255,255,255,.4);padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.08)}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark">R</div>Replify</a>
+    <div class="nav-links">
+      <a href="#features">Funciones</a>
+      <a href="#use-cases">Casos de uso</a>
+      <a href="pricing.html">Precios</a>
+      <a href="documentacion.html">Docs</a>
+      <a href="afiliados.html">Afiliados</a>
+    </div>
+    <div class="nav-right">
+      <a href="login.html" class="btn-sm btn-ghost">Iniciar sesión</a>
+      <a href="login.html" class="btn-sm btn-fill">Prueba gratis →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🤖 Powered by IA · WhatsApp Business API</div>
+        <h1>Atiende a tus clientes<br><span>24/7 en WhatsApp</span><br>sin contratar más staff</h1>
+        <p class="hero-sub">Replify automatiza las respuestas de WhatsApp de tu negocio con inteligencia artificial. Responde al instante, convierte prospectos y da soporte sin intervención humana.</p>
+        <div class="hero-cta">
+          <a href="login.html" class="btn-green">💬 Empezar gratis — 14 días</a>
+          <a href="#demo" class="btn-outline-white">▶ Ver demo</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <span style="background:linear-gradient(135deg,#F59E0B,#D97706)">CR</span>
+            <span style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">MP</span>
+            <span style="background:linear-gradient(135deg,#10B981,#059669)">RA</span>
+            <span style="background:linear-gradient(135deg,#EF4444,#DC2626)">JL</span>
+          </div>
+          <div class="trust-text"><strong>+4,200 negocios</strong> ya automatizados en LATAM</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="wa-header">
+              <div class="wa-av">R</div>
+              <div class="wa-info">
+                <div class="wa-name">Replify Bot 🤖</div>
+                <div class="wa-status">En línea</div>
+              </div>
+            </div>
+            <div class="wa-body">
+              <div class="wa-msg in">Hola! ¿Cuánto cuesta el plan mensual?<div class="wa-time">10:32</div></div>
+              <div class="wa-msg out">¡Hola! 👋 Nuestro plan Pro cuesta $49/mes e incluye IA ilimitada, múltiples agentes y reportes en tiempo real. ¿Te gustaría iniciar una prueba gratis de 14 días? 🚀<div class="wa-time">10:32 ✓✓</div></div>
+              <div class="wa-msg in">Sí! ¿Cómo empiezo?<div class="wa-time">10:33</div></div>
+              <div class="wa-msg out">¡Perfecto! Haz clic en este enlace para crear tu cuenta en 2 minutos, sin tarjeta de crédito: replify.ai/registro ✨<div class="wa-time">10:33 ✓✓</div></div>
+              <div class="wa-typing"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="ai-badge">⚡ IA respondió en 0.3s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands">
+  <div class="container">
+    <p class="brands-label">Utilizado por negocios en toda Latinoamérica</p>
+    <div class="brands-row">
+      <span class="brand-item">🛍️ Tiendas Online</span>
+      <span class="brand-item">🏥 Clínicas</span>
+      <span class="brand-item">🏢 Inmobiliarias</span>
+      <span class="brand-item">🎓 Escuelas</span>
+      <span class="brand-item">🚗 Agencias de Autos</span>
+      <span class="brand-item">💇 Salones de Belleza</span>
+      <span class="brand-item">🍕 Restaurantes</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">⚡ Funcionalidades</div>
+      <h2 class="section-title" style="margin:0 auto 10px">Todo lo que necesitas para<br>automatizar tu WhatsApp</h2>
+      <p class="section-sub" style="margin:0 auto">Sin código, sin conocimientos técnicos. Configura tu bot en minutos.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon green">🤖</div>
+        <div class="feat-title">IA Conversacional</div>
+        <p class="feat-desc">Respuestas inteligentes y naturales entrenadas con la información de tu negocio. El bot aprende y mejora continuamente.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon blue">📅</div>
+        <div class="feat-title">Agenda de Citas</div>
+        <p class="feat-desc">Los clientes reservan citas directamente desde WhatsApp. Integración automática con Google Calendar.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">🛒</div>
+        <div class="feat-title">Catálogo de Productos</div>
+        <p class="feat-desc">Muestra tu catálogo, toma pedidos y procesa pagos directamente en la conversación de WhatsApp.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon green">👥</div>
+        <div class="feat-title">Múltiples Agentes</div>
+        <p class="feat-desc">Asigna conversaciones a tu equipo cuando el bot lo detecte necesario. Bandeja compartida en tiempo real.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon blue">📊</div>
+        <div class="feat-title">Analytics Avanzado</div>
+        <p class="feat-desc">Métricas de conversión, tiempo de respuesta, satisfacción del cliente y volumen de mensajes en un dashboard.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">🔗</div>
+        <div class="feat-title">Integraciones</div>
+        <p class="feat-desc">Conecta con CRM, Shopify, Google Sheets, Notion, HubSpot y más de 50 herramientas vía API o Zapier.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon green">📢</div>
+        <div class="feat-title">Campañas Masivas</div>
+        <p class="feat-desc">Envía mensajes masivos personalizados a tu lista de contactos. Promos, recordatorios y notificaciones.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon blue">🔒</div>
+        <div class="feat-title">API Oficial de WhatsApp</div>
+        <p class="feat-desc">Conexión segura vía WhatsApp Business API oficial de Meta. Sin riesgo de baneo, 100% cumplimiento.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">🌐</div>
+        <div class="feat-title">Multiidioma</div>
+        <p class="feat-desc">El bot detecta automáticamente el idioma del cliente y responde en español, inglés, portugués y más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div><div class="stat-val">4,200+</div><div class="stat-label">Negocios automatizados<br>en Latinoamérica</div></div>
+      <div><div class="stat-val">98%</div><div class="stat-label">Tasa de respuesta<br>en menos de 5 segundos</div></div>
+      <div><div class="stat-val">3.2x</div><div class="stat-label">Aumento promedio<br>en conversión de ventas</div></div>
+      <div><div class="stat-val">$0</div><div class="stat-label">Costo de soporte extra<br>con Replify activo 24/7</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="use-cases" id="use-cases">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag" style="background:var(--green-light);color:#166534">🏪 Casos de uso</div>
+      <h2 class="section-title" style="margin:0 auto 10px">Funciona para cualquier<br>tipo de negocio</h2>
+      <p class="section-sub" style="margin:0 auto">Configura tu bot según tu industria en menos de 10 minutos.</p>
+    </div>
+    <div class="uc-tabs">
+      <div class="uc-tab active">🛍️ E-Commerce</div>
+      <div class="uc-tab">🏥 Salud</div>
+      <div class="uc-tab">🏢 Inmobiliaria</div>
+      <div class="uc-tab">🎓 Educación</div>
+      <div class="uc-tab">🍕 Restaurantes</div>
+    </div>
+    <div class="uc-content">
+      <div class="uc-list">
+        <div class="uc-item">
+          <div class="uc-icon">🛒</div>
+          <div class="uc-text">
+            <h4>Gestión de pedidos automática</h4>
+            <p>El bot toma pedidos, confirma disponibilidad en tu inventario y envía actualizaciones de envío en tiempo real.</p>
+          </div>
+        </div>
+        <div class="uc-item">
+          <div class="uc-icon">💳</div>
+          <div class="uc-text">
+            <h4>Pagos y cobros integrados</h4>
+            <p>Genera links de pago, acepta tarjetas y confirmaciones de transferencia directamente en WhatsApp.</p>
+          </div>
+        </div>
+        <div class="uc-item">
+          <div class="uc-icon">🔄</div>
+          <div class="uc-text">
+            <h4>Seguimiento post-venta</h4>
+            <p>Envía actualizaciones de envío, solicita reseñas y gestiona devoluciones de forma completamente automática.</p>
+          </div>
+        </div>
+      </div>
+      <div class="uc-visual">
+        <div class="conv-bubble">
+          <div class="cb user"><div class="cb-label">Cliente</div>Quiero pedir 2 pares de tenis talla 42, color azul</div>
+          <div class="cb bot"><div class="cb-label">Replify IA</div>¡Perfecto! 👟 Encontré los Nike Air Max Talla 42 en azul — $1,290 c/u. Total: $2,580 + envío gratis. ¿Confirmo tu pedido?</div>
+          <div class="cb user"><div class="cb-label">Cliente</div>Sí, confírmalo</div>
+          <div class="cb bot"><div class="cb-label">Replify IA</div>✅ Pedido #4821 confirmado. Te envío el link de pago y en 24-48h recibes tu número de rastreo. ¡Gracias! 🚀</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="demo">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-tag">⭐ Testimonios</div>
+      <h2 class="section-title" style="margin:0 auto 10px">Lo que dicen nuestros clientes</h2>
+      <p class="section-sub" style="margin:0 auto">Más de 4,200 negocios confían en Replify para atender a sus clientes.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Antes perdíamos el 40% de consultas por no responder rápido. Ahora Replify responde en segundos y nuestra conversión subió 3x. Mejor inversión del año."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#F59E0B,#D97706)">LG</div>
+          <div><div class="test-name">Laura González</div><div class="test-role">Dueña de Tienda Online · Guadalajara</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"En mi clínica dental tenemos 200+ mensajes diarios. Replify agenda el 80% de citas sin que yo toque el teléfono. Increíble. El ROI fue en el primer mes."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#10B981,#059669)">DM</div>
+          <div><div class="test-name">Dr. Diego Morales</div><div class="test-role">Clínica Dental · Bogotá</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Replify habla con mis clientes como si fuera yo. Responde preguntas de propiedades, agenda visitas y califica leads. Mi equipo ahora solo atiende a los calificados."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">AR</div>
+          <div><div class="test-name">Ana Rodríguez</div><div class="test-role">Agente Inmobiliaria · CDMX</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Tengo 3 restaurantes y Replify toma reservaciones, confirma pedidos y envía el menú del día. Ahorré el sueldo de 2 personas en atención al cliente."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#EF4444,#DC2626)">RC</div>
+          <div><div class="test-name">Roberto Castillo</div><div class="test-role">Restaurantero · Monterrey</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Configuré Replify en 20 minutos para mi academia de inglés. Ahora agenda clases, envía materiales y hace seguimiento automático a estudiantes inactivos. Genial."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#0EA5E9,#0284C7)">PT</div>
+          <div><div class="test-name">Patricia Torres</div><div class="test-role">Academia de Inglés · Lima</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"El soporte de Replify es excelente y el producto se actualiza constantemente. Empecé con el plan básico y ya estoy en Enterprise. Totalmente recomendado."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#F97316,#EA580C)">JV</div>
+          <div><div class="test-name">Jorge Vargas</div><div class="test-role">Agencia de Marketing · Santiago</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <h2>Automatiza tu WhatsApp<br><span>hoy mismo</span></h2>
+    <p>14 días gratis, sin tarjeta de crédito. Configura en minutos y empieza a atender clientes 24/7 con inteligencia artificial.</p>
+    <div class="cta-btns">
+      <a href="login.html" class="btn-green">💬 Empezar prueba gratis</a>
+      <a href="pricing.html" class="btn-outline-white">Ver planes y precios →</a>
+    </div>
+    <p class="cta-note">✓ Sin tarjeta de crédito &nbsp;·&nbsp; ✓ Cancela cuando quieras &nbsp;·&nbsp; ✓ Soporte en español</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><div class="logo-mark">R</div>Replify</div>
+        <p class="footer-tagline">Automatización de WhatsApp con IA para negocios de Latinoamérica. Responde 24/7, convierte más, trabaja menos.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <a href="#features">Funciones</a>
+        <a href="pricing.html">Precios</a>
+        <a href="#use-cases">Casos de uso</a>
+        <a href="documentacion.html">Documentación</a>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Blog</a>
+        <a href="afiliados.html">Afiliados</a>
+        <a href="#">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Términos de uso</a>
+        <a href="#">Privacidad</a>
+        <a href="#">Cookies</a>
+        <a href="#">API Status</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Replify. Todos los derechos reservados.</div>
+      <div class="footer-badges">
+        <span class="f-badge">🔒 WhatsApp API Oficial</span>
+        <span class="f-badge">🇲🇽 Hecho en LATAM</span>
+        <span class="f-badge">⭐ 4.9/5 en G2</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

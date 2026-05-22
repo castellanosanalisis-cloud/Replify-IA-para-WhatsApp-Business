@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Planes y precios de Replify — Automatización de WhatsApp con IA desde $19/mes. 14 días gratis."/>
+  <title>Precios — Replify</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235888FF'/><text y='.9em' font-size='70' x='12'>💬</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--blue:#5888FF;--blue-dark:#3956FF;--blue-light:#EEF3FF;--green:#25D366;--green-dark:#128C7E;--dark:#0F2A51;--gray:#6B7280;--gray-light:#F8FAFC;--border:#E5E7EB;--white:#fff;--text:#111827;--gold:#F59E0B;--gold-light:#FEF3C7}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white)}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    a{text-decoration:none;color:inherit}
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:68px;padding:0 24px;gap:16px}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif}
+    .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:.95rem}
+    .nav-right{margin-left:auto;display:flex;gap:10px}
+    .btn-sm{padding:8px 16px;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all .2s;text-decoration:none;display:inline-block}
+    .btn-ghost{border:1.5px solid var(--border);background:none;color:var(--text)}
+    .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+    .btn-fill{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white}
+
+    /* HERO */
+    .page-hero{padding:110px 0 60px;text-align:center;background:linear-gradient(145deg,#0F2A51,#1A3A6E)}
+    .page-hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:900;color:white;font-family:'Poppins',sans-serif;margin-bottom:12px}
+    .page-hero h1 span{background:linear-gradient(135deg,#86EFAC,#25D366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .page-hero p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:28px;line-height:1.8}
+
+    /* TOGGLE */
+    .toggle-wrap{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:8px}
+    .toggle-label{font-size:.84rem;color:rgba(255,255,255,.5);font-weight:600}
+    .toggle-label.active{color:white}
+    .toggle{width:52px;height:28px;background:rgba(255,255,255,.15);border-radius:14px;position:relative;cursor:pointer;border:1.5px solid rgba(255,255,255,.2)}
+    .toggle-dot{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:white;transition:transform .25s}
+    .toggle.annual .toggle-dot{transform:translateX(24px)}
+    .save-badge{background:linear-gradient(135deg,var(--gold),#D97706);color:white;font-size:.68rem;font-weight:800;padding:3px 8px;border-radius:12px;margin-left:4px}
+
+    /* PLANS */
+    .plans-section{padding:60px 0 80px;background:var(--gray-light)}
+    .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:960px;margin:0 auto}
+    @media(max-width:768px){.plans-grid{grid-template-columns:1fr;max-width:420px}}
+    .plan-card{background:white;border:2px solid var(--border);border-radius:22px;padding:30px;position:relative;transition:all .25s}
+    .plan-card:hover{box-shadow:0 12px 36px rgba(88,136,255,.12);transform:translateY(-4px)}
+    .plan-card.popular{border-color:var(--blue);box-shadow:0 8px 32px rgba(88,136,255,.18)}
+    .popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white;font-size:.72rem;font-weight:800;padding:5px 16px;border-radius:20px;white-space:nowrap}
+    .plan-name{font-size:.8rem;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .plan-price{display:flex;align-items:baseline;gap:4px;margin-bottom:4px}
+    .plan-price .currency{font-size:1.4rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;align-self:flex-start;margin-top:8px}
+    .plan-price .amount{font-size:3.2rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;line-height:1}
+    .plan-price .period{font-size:.82rem;color:var(--gray);font-weight:600}
+    .plan-desc{font-size:.8rem;color:var(--gray);line-height:1.6;margin-bottom:22px;min-height:48px}
+    .plan-btn{display:block;text-align:center;padding:12px;border-radius:12px;font-size:.88rem;font-weight:800;font-family:inherit;cursor:pointer;border:none;margin-bottom:24px;transition:all .25s;text-decoration:none}
+    .plan-btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white}
+    .plan-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(88,136,255,.35)}
+    .plan-btn.secondary{border:2px solid var(--border);background:none;color:var(--dark)}
+    .plan-btn.secondary:hover{border-color:var(--blue);color:var(--blue)}
+    .plan-divider{border:none;border-top:1px solid var(--border);margin-bottom:20px}
+    .plan-feat-title{font-size:.74rem;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+    .plan-feats{list-style:none;display:flex;flex-direction:column;gap:9px}
+    .plan-feats li{display:flex;align-items:flex-start;gap:8px;font-size:.8rem;color:var(--text);line-height:1.5}
+    .plan-feats li::before{content:'✓';color:var(--green);font-weight:900;flex-shrink:0;margin-top:1px}
+    .plan-feats li.cross{color:var(--gray);opacity:.55}
+    .plan-feats li.cross::before{content:'✕';color:var(--border)}
+
+    /* COMPARE TABLE */
+    .compare-section{padding:80px 0}
+    .compare-section h2{font-size:1.8rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;text-align:center;margin-bottom:8px}
+    .compare-section .sub{text-align:center;font-size:.88rem;color:var(--gray);margin-bottom:40px}
+    .compare-table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .compare-table th{background:var(--dark);color:white;padding:16px 20px;font-size:.8rem;font-weight:800;text-align:left;font-family:'Poppins',sans-serif}
+    .compare-table th:not(:first-child){text-align:center}
+    .compare-table td{padding:14px 20px;font-size:.82rem;border-bottom:1px solid var(--border);background:white}
+    .compare-table td:not(:first-child){text-align:center;font-weight:700}
+    .compare-table tr:hover td{background:var(--gray-light)}
+    .compare-table tr:last-child td{border-bottom:none}
+    .compare-table .feat-group td{background:var(--gray-light);color:var(--gray);font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:10px 20px}
+    .check{color:var(--green);font-size:1.1rem}
+    .cross-x{color:#D1D5DB;font-size:1rem}
+    .highlight-col{background:var(--blue-light)!important;color:var(--blue-dark)}
+    @media(max-width:768px){.compare-section{overflow-x:auto}}
+
+    /* FAQ */
+    .faq-section{padding:72px 0;background:var(--gray-light)}
+    .faq-section h2{font-size:1.6rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;text-align:center;margin-bottom:36px}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:860px;margin:0 auto}
+    @media(max-width:640px){.faq-grid{grid-template-columns:1fr}}
+    .faq-item{padding:20px;border:1.5px solid var(--border);border-radius:14px;background:white}
+    .faq-q{font-size:.9rem;font-weight:800;color:var(--dark);margin-bottom:8px}
+    .faq-a{font-size:.82rem;color:var(--gray);line-height:1.75}
+
+    /* CTA */
+    .cta-section{padding:80px 0;text-align:center;background:linear-gradient(135deg,#0F2A51,#1A3A6E)}
+    .cta-section h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;color:white;font-family:'Poppins',sans-serif;margin-bottom:12px}
+    .cta-section p{font-size:.92rem;color:rgba(255,255,255,.5);margin-bottom:28px;line-height:1.8;max-width:480px;margin-left:auto;margin-right:auto}
+    .btn-green{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:14px;background:linear-gradient(135deg,#25D366,#128C7E);color:white;font-size:.98rem;font-weight:800;border:none;cursor:pointer;font-family:inherit;transition:all .25s;text-decoration:none}
+    .btn-green:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.4)}
+    .cta-note{font-size:.76rem;color:rgba(255,255,255,.3);margin-top:12px}
+    footer{background:#0A1E3D;padding:28px 0}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .footer-copy{font-size:.76rem;color:rgba(255,255,255,.25)}
+    .footer-links-r{display:flex;gap:16px}
+    .footer-links-r a{font-size:.76rem;color:rgba(255,255,255,.35);transition:color .2s;text-decoration:none}
+    .footer-links-r a:hover{color:white}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark">R</div>Replify</a>
+    <div class="nav-right">
+      <a href="afiliados.html" class="btn-sm btn-ghost">Afiliados</a>
+      <a href="login.html" class="btn-sm btn-ghost">Iniciar sesión</a>
+      <a href="login.html" class="btn-sm btn-fill">Prueba gratis</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Planes simples,<br><span>resultados extraordinarios</span></h1>
+    <p>14 días gratis en cualquier plan · Sin tarjeta de crédito · Cancela cuando quieras</p>
+    <div class="toggle-wrap">
+      <span class="toggle-label active" id="lbl-monthly">Mensual</span>
+      <div class="toggle" id="billing-toggle" onclick="toggleBilling()"><div class="toggle-dot"></div></div>
+      <span class="toggle-label" id="lbl-annual">Anual <span class="save-badge">Ahorra 20%</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-section">
+  <div class="container">
+    <div class="plans-grid">
+      <!-- STARTER -->
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount" data-monthly="19" data-annual="15">19</span>
+          <span class="period">/mes</span>
+        </div>
+        <p class="plan-desc">Perfecto para emprendedores y pequeños negocios que quieren automatizar sus primeras respuestas.</p>
+        <a href="login.html" class="plan-btn secondary">Empezar gratis →</a>
+        <hr class="plan-divider"/>
+        <p class="plan-feat-title">Incluye</p>
+        <ul class="plan-feats">
+          <li>1 número de WhatsApp</li>
+          <li>500 conversaciones / mes</li>
+          <li>IA conversacional básica</li>
+          <li>Respuestas automáticas 24/7</li>
+          <li>Dashboard básico</li>
+          <li>Soporte por email</li>
+          <li class="cross">Múltiples agentes humanos</li>
+          <li class="cross">Campañas masivas</li>
+          <li class="cross">Integraciones avanzadas</li>
+        </ul>
+      </div>
+
+      <!-- PRO (POPULAR) -->
+      <div class="plan-card popular">
+        <div class="popular-badge">⭐ Más popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount" data-monthly="49" data-annual="39">49</span>
+          <span class="period">/mes</span>
+        </div>
+        <p class="plan-desc">El favorito de negocios en crecimiento. IA avanzada, múltiples agentes y todas las integraciones clave.</p>
+        <a href="login.html" class="plan-btn primary">Empezar gratis →</a>
+        <hr class="plan-divider"/>
+        <p class="plan-feat-title">Todo en Starter, más:</p>
+        <ul class="plan-feats">
+          <li>3 números de WhatsApp</li>
+          <li>5,000 conversaciones / mes</li>
+          <li>IA avanzada + personalización</li>
+          <li>5 agentes humanos</li>
+          <li>Campañas masivas (hasta 2K)</li>
+          <li>CRM básico integrado</li>
+          <li>Google Calendar + Sheets</li>
+          <li>Analytics avanzado</li>
+          <li>Soporte prioritario por chat</li>
+        </ul>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan-card">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">
+          <span class="currency">$</span>
+          <span class="amount" data-monthly="149" data-annual="119">149</span>
+          <span class="period">/mes</span>
+        </div>
+        <p class="plan-desc">Para equipos y agencias. Sin límites, IA ultra-personalizada, API completa y gerente de cuenta dedicado.</p>
+        <a href="login.html" class="plan-btn secondary">Contactar ventas →</a>
+        <hr class="plan-divider"/>
+        <p class="plan-feat-title">Todo en Pro, más:</p>
+        <ul class="plan-feats">
+          <li>Números ilimitados de WhatsApp</li>
+          <li>Conversaciones ilimitadas</li>
+          <li>IA ultra-personalizada (GPT-4)</li>
+          <li>Agentes humanos ilimitados</li>
+          <li>Campañas masivas ilimitadas</li>
+          <li>API completa + Webhooks</li>
+          <li>Integraciones personalizadas</li>
+          <li>Onboarding dedicado</li>
+          <li>Gerente de cuenta + SLA 99.9%</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.78rem;color:var(--gray);margin-top:24px">Todos los planes incluyen 14 días de prueba gratis. Sin tarjeta de crédito. Precios en USD.</p>
+  </div>
+</section>
+
+<!-- COMPARE TABLE -->
+<section class="compare-section">
+  <div class="container">
+    <h2>Comparar todos los planes</h2>
+    <p class="sub">Encuentra el plan perfecto para el tamaño de tu negocio</p>
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="min-width:220px">Característica</th>
+            <th style="min-width:130px">Starter<br><span style="font-weight:400;font-size:.75rem">$19/mes</span></th>
+            <th style="min-width:130px;background:var(--blue)">Pro ⭐<br><span style="font-weight:400;font-size:.75rem">$49/mes</span></th>
+            <th style="min-width:130px">Enterprise<br><span style="font-weight:400;font-size:.75rem">$149/mes</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="feat-group"><td colspan="4">📱 WhatsApp</td></tr>
+          <tr><td>Números de WhatsApp</td><td>1</td><td class="highlight-col">3</td><td>Ilimitados</td></tr>
+          <tr><td>Conversaciones/mes</td><td>500</td><td class="highlight-col">5,000</td><td>Ilimitadas</td></tr>
+          <tr><td>WhatsApp Business API Oficial</td><td><span class="check">✓</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr class="feat-group"><td colspan="4">🤖 Inteligencia Artificial</td></tr>
+          <tr><td>IA conversacional</td><td>Básica</td><td class="highlight-col">Avanzada</td><td>Ultra (GPT-4)</td></tr>
+          <tr><td>Personalización de respuestas</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Entrenamiento con tus datos</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr class="feat-group"><td colspan="4">👥 Equipo</td></tr>
+          <tr><td>Agentes humanos</td><td>1</td><td class="highlight-col">5</td><td>Ilimitados</td></tr>
+          <tr><td>Bandeja compartida</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Roles y permisos</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr class="feat-group"><td colspan="4">🔗 Integraciones</td></tr>
+          <tr><td>Google Calendar</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>CRM (HubSpot, Pipedrive)</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>API + Webhooks</td><td><span class="cross-x">✕</span></td><td class="highlight-col"><span class="cross-x">✕</span></td><td><span class="check">✓</span></td></tr>
+          <tr class="feat-group"><td colspan="4">📊 Soporte</td></tr>
+          <tr><td>Soporte</td><td>Email</td><td class="highlight-col">Chat prioritario</td><td>Gerente dedicado</td></tr>
+          <tr><td>Onboarding</td><td>Self-service</td><td class="highlight-col">Guiado</td><td>Personalizado</td></tr>
+          <tr><td>SLA uptime</td><td>99%</td><td class="highlight-col">99.5%</td><td>99.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Preguntas frecuentes sobre precios</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q">¿Necesito tarjeta para la prueba gratis?</div><p class="faq-a">No. Los 14 días de prueba son completamente gratis y no requieren tarjeta de crédito. Al finalizar, elige el plan que más te convenga.</p></div>
+      <div class="faq-item"><div class="faq-q">¿Puedo cambiar de plan después?</div><p class="faq-a">Sí, puedes subir o bajar de plan en cualquier momento desde tu dashboard. Los cambios se reflejan en el próximo ciclo de facturación.</p></div>
+      <div class="faq-item"><div class="faq-q">¿Qué pasa si supero mi límite de conversaciones?</div><p class="faq-a">Te notificamos cuando alcances el 80% de tu límite. Puedes subir de plan o comprar packs adicionales de conversaciones sin interrumpir el servicio.</p></div>
+      <div class="faq-item"><div class="faq-q">¿Los precios incluyen la API de WhatsApp?</div><p class="faq-a">Replify incluye el acceso a la API oficial de WhatsApp Business. Meta cobra una tarifa adicional por conversaciones (aprox. $0.01-0.05 según país). Te lo explicamos en el onboarding.</p></div>
+      <div class="faq-item"><div class="faq-q">¿Puedo cancelar en cualquier momento?</div><p class="faq-a">Sí, puedes cancelar cuando quieras. No hay contratos ni penalizaciones. Tu cuenta permanecerá activa hasta el final del periodo pagado.</p></div>
+      <div class="faq-item"><div class="faq-q">¿Tienen descuentos para agencias o reventa?</div><p class="faq-a">Sí. Si gestionas múltiples cuentas de clientes, tenemos planes de agencia con descuentos especiales. Contáctanos para más información.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Comienza tu prueba gratis hoy</h2>
+    <p>14 días sin compromisos. Configura en minutos y empieza a atender clientes 24/7.</p>
+    <a href="login.html" class="btn-green">💬 Empezar gratis — sin tarjeta</a>
+    <p class="cta-note">✓ 14 días gratis &nbsp;·&nbsp; ✓ Sin tarjeta &nbsp;·&nbsp; ✓ Soporte en español</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Replify. Todos los derechos reservados.</div>
+      <div class="footer-links-r">
+        <a href="index.html">Inicio</a>
+        <a href="afiliados.html">Afiliados</a>
+        <a href="documentacion.html">Docs</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+let isAnnual = false;
+function toggleBilling() {
+  isAnnual = !isAnnual;
+  document.getElementById('billing-toggle').classList.toggle('annual', isAnnual);
+  document.getElementById('lbl-monthly').classList.toggle('active', !isAnnual);
+  document.getElementById('lbl-annual').classList.toggle('active', isAnnual);
+  document.querySelectorAll('.amount').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+}
+</script>
+</body>
+</html>

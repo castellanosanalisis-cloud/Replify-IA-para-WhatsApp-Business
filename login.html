@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iniciar sesión — Replify</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235888FF'/><text y='.9em' font-size='70' x='12'>💬</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--blue:#5888FF;--blue-dark:#3956FF;--blue-light:#EEF3FF;--green:#25D366;--green-dark:#128C7E;--dark:#0F2A51;--gray:#6B7280;--gray-light:#F8FAFC;--border:#E5E7EB;--white:#fff;--text:#111827}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--gray-light);min-height:100vh;display:flex;flex-direction:column}
+    a{text-decoration:none;color:inherit}
+
+    /* LAYOUT */
+    .auth-layout{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+    @media(max-width:900px){.auth-layout{grid-template-columns:1fr}}
+
+    /* LEFT PANEL */
+    .auth-left{background:linear-gradient(145deg,#0F2A51 0%,#1A3A6E 55%,#163060 100%);padding:48px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+    .auth-left::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(37,211,102,.1),transparent 65%)}
+    .auth-left::after{content:'';position:absolute;bottom:-100px;left:-60px;width:360px;height:360px;border-radius:50%;background:radial-gradient(ellipse,rgba(88,136,255,.12),transparent 65%)}
+    @media(max-width:900px){.auth-left{display:none}}
+    .left-logo{display:flex;align-items:center;gap:10px;font-size:1.4rem;font-weight:900;color:white;font-family:'Poppins',sans-serif;position:relative;z-index:1}
+    .logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:1rem}
+    .left-body{position:relative;z-index:1}
+    .left-body h2{font-size:2rem;font-weight:900;color:white;font-family:'Poppins',sans-serif;line-height:1.2;margin-bottom:14px}
+    .left-body h2 span{background:linear-gradient(135deg,#86EFAC,#25D366);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .left-body p{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:32px}
+    .left-feats{display:flex;flex-direction:column;gap:12px}
+    .left-feat{display:flex;align-items:center;gap:12px}
+    .left-feat-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+    .left-feat-text{font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.5}
+    .left-feat-text strong{color:white;display:block;font-size:.84rem;margin-bottom:1px}
+    .left-bottom{position:relative;z-index:1}
+    .trust-row{display:flex;align-items:center;gap:10px}
+    .trust-avatars{display:flex}
+    .trust-avatars span{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:white;margin-left:-6px}
+    .trust-avatars span:first-child{margin-left:0}
+    .trust-txt{font-size:.76rem;color:rgba(255,255,255,.45)}
+    .trust-txt strong{color:rgba(255,255,255,.8)}
+
+    /* RIGHT PANEL */
+    .auth-right{display:flex;align-items:center;justify-content:center;padding:32px 24px}
+    .auth-card{width:100%;max-width:420px}
+    .mobile-logo{display:none;justify-content:center;margin-bottom:32px}
+    @media(max-width:900px){.mobile-logo{display:flex}}
+    .mobile-logo a{display:flex;align-items:center;gap:10px;font-size:1.3rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif}
+    .auth-tabs{display:flex;background:var(--border);border-radius:12px;padding:4px;margin-bottom:28px}
+    .auth-tab{flex:1;text-align:center;padding:9px;border-radius:9px;font-size:.84rem;font-weight:700;cursor:pointer;transition:all .2s;color:var(--gray)}
+    .auth-tab.active{background:white;color:var(--dark);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .auth-title{font-size:1.5rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;margin-bottom:4px}
+    .auth-sub{font-size:.82rem;color:var(--gray);margin-bottom:24px;line-height:1.6}
+    .social-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px;border:1.5px solid var(--border);border-radius:11px;background:white;font-size:.86rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;margin-bottom:10px;color:var(--dark)}
+    .social-btn:hover{border-color:var(--blue);background:var(--blue-light)}
+    .social-btn svg{width:18px;height:18px}
+    .divider{display:flex;align-items:center;gap:12px;margin:16px 0}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .divider span{font-size:.74rem;color:var(--gray);font-weight:600;white-space:nowrap}
+    .field{margin-bottom:16px}
+    .field label{display:block;font-size:.78rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+    .field input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.9rem;font-family:inherit;color:var(--text);outline:none;transition:border .2s;background:white}
+    .field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(88,136,255,.1)}
+    .field input::placeholder{color:#9CA3AF}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .forgot{display:block;text-align:right;font-size:.76rem;color:var(--blue);font-weight:600;margin-top:-8px;margin-bottom:16px}
+    .submit-btn{display:block;width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white;font-size:.92rem;font-weight:800;font-family:inherit;border:none;cursor:pointer;transition:all .25s;margin-bottom:14px}
+    .submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(88,136,255,.35)}
+    .submit-btn.green{background:linear-gradient(135deg,#25D366,#128C7E)}
+    .submit-btn.green:hover{box-shadow:0 6px 18px rgba(37,211,102,.35)}
+    .terms{font-size:.72rem;color:var(--gray);text-align:center;line-height:1.6}
+    .terms a{color:var(--blue)}
+    .switch-mode{text-align:center;font-size:.8rem;color:var(--gray);margin-top:20px}
+    .switch-mode a{color:var(--blue);font-weight:700}
+    .trial-badge{display:flex;align-items:center;gap:8px;background:#DCFCE7;border:1px solid #BBF7D0;border-radius:10px;padding:10px 14px;margin-bottom:20px;font-size:.78rem;color:#166534;font-weight:600}
+  </style>
+</head>
+<body>
+<div class="auth-layout">
+  <!-- LEFT -->
+  <div class="auth-left">
+    <div class="left-logo"><div class="logo-mark">R</div>Replify</div>
+    <div class="left-body">
+      <h2>Tu negocio atendiendo<br>clientes <span>24/7 en WhatsApp</span></h2>
+      <p>Más de 4,200 negocios en LATAM ya automatizaron su atención al cliente con Replify. Únete hoy.</p>
+      <div class="left-feats">
+        <div class="left-feat">
+          <div class="left-feat-icon">🤖</div>
+          <div class="left-feat-text"><strong>IA conversacional avanzada</strong>Responde como tú, sin que tú estés presente</div>
+        </div>
+        <div class="left-feat">
+          <div class="left-feat-icon">⚡</div>
+          <div class="left-feat-text"><strong>Activo en 10 minutos</strong>Sin código, sin técnicos, sin complicaciones</div>
+        </div>
+        <div class="left-feat">
+          <div class="left-feat-icon">📈</div>
+          <div class="left-feat-text"><strong>+3.2x conversión promedio</strong>Más ventas cerradas, menos leads perdidos</div>
+        </div>
+        <div class="left-feat">
+          <div class="left-feat-icon">🔒</div>
+          <div class="left-feat-text"><strong>API Oficial de WhatsApp</strong>100% seguro, sin riesgo de baneo</div>
+        </div>
+      </div>
+    </div>
+    <div class="left-bottom">
+      <div class="trust-row">
+        <div class="trust-avatars">
+          <span style="background:linear-gradient(135deg,#F59E0B,#D97706)">LG</span>
+          <span style="background:linear-gradient(135deg,#10B981,#059669)">DM</span>
+          <span style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)">AR</span>
+          <span style="background:linear-gradient(135deg,#EF4444,#DC2626)">RC</span>
+        </div>
+        <div class="trust-txt"><strong>4,200+ negocios</strong> confían en Replify</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="mobile-logo">
+        <a href="index.html"><div class="logo-mark" style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#5888FF,#3956FF);display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:.95rem">R</div><span style="font-size:1.2rem;font-weight:900;color:#0F2A51;font-family:'Poppins',sans-serif;margin-left:8px">Replify</span></a>
+      </div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab" id="tab-login" onclick="showLogin()">Iniciar sesión</div>
+        <div class="auth-tab active" id="tab-signup" onclick="showSignup()">Crear cuenta</div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div id="form-signup">
+        <div class="trial-badge">🎉 14 días gratis · Sin tarjeta de crédito requerida</div>
+        <h1 class="auth-title">Crea tu cuenta gratis</h1>
+        <p class="auth-sub">Configura tu bot de WhatsApp en minutos</p>
+        <button class="social-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continuar con Google
+        </button>
+        <div class="divider"><span>o con tu email</span></div>
+        <div class="field-row">
+          <div class="field"><label>Nombre</label><input type="text" placeholder="Juan"/></div>
+          <div class="field"><label>Apellido</label><input type="text" placeholder="García"/></div>
+        </div>
+        <div class="field"><label>Email de trabajo</label><input type="email" placeholder="juan@empresa.com"/></div>
+        <div class="field"><label>Contraseña</label><input type="password" placeholder="Mínimo 8 caracteres"/></div>
+        <div class="field"><label>Nombre del negocio</label><input type="text" placeholder="Mi Tienda Online"/></div>
+        <button class="submit-btn green" onclick="handleSignup()">🚀 Crear cuenta gratis →</button>
+        <p class="terms">Al crear tu cuenta aceptas nuestros <a href="#">Términos de uso</a> y <a href="#">Política de privacidad</a></p>
+        <p class="switch-mode">¿Ya tienes cuenta? <a href="#" onclick="showLogin();return false">Iniciar sesión</a></p>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="form-login" style="display:none">
+        <h1 class="auth-title">Bienvenido de vuelta</h1>
+        <p class="auth-sub">Ingresa a tu panel de Replify</p>
+        <button class="social-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continuar con Google
+        </button>
+        <div class="divider"><span>o con tu email</span></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="juan@empresa.com"/></div>
+        <div class="field"><label>Contraseña</label><input type="password" placeholder="Tu contraseña"/></div>
+        <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+        <button class="submit-btn" onclick="handleLogin()">Iniciar sesión →</button>
+        <p class="switch-mode">¿No tienes cuenta? <a href="#" onclick="showSignup();return false">Crear cuenta gratis</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showLogin(){
+  document.getElementById('form-login').style.display='block';
+  document.getElementById('form-signup').style.display='none';
+  document.getElementById('tab-login').classList.add('active');
+  document.getElementById('tab-signup').classList.remove('active');
+}
+function showSignup(){
+  document.getElementById('form-login').style.display='none';
+  document.getElementById('form-signup').style.display='block';
+  document.getElementById('tab-signup').classList.add('active');
+  document.getElementById('tab-login').classList.remove('active');
+}
+function handleSignup(){alert('¡Cuenta creada! Revisa tu email para confirmar tu registro.');}
+function handleLogin(){alert('Iniciando sesión...');}
+</script>
+</body>
+</html>

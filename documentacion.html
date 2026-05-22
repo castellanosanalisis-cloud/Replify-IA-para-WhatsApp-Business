@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Documentación técnica de Replify — Guías de inicio, API reference, integraciones y tutoriales."/>
+  <title>Documentación — Replify</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%235888FF'/><text y='.9em' font-size='70' x='12'>💬</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--blue:#5888FF;--blue-dark:#3956FF;--blue-light:#EEF3FF;--green:#25D366;--dark:#0F2A51;--gray:#6B7280;--gray-light:#F8FAFC;--border:#E5E7EB;--white:#fff;--text:#111827;--sidebar-w:260px}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);display:flex;flex-direction:column;min-height:100vh}
+    a{text-decoration:none;color:inherit}
+    code{font-family:'JetBrains Mono',monospace;font-size:.82em;background:#F1F5F9;padding:2px 6px;border-radius:5px;color:#0F2A51}
+    pre{background:#0F2A51;color:#E2E8F0;padding:20px;border-radius:12px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.7;margin:16px 0}
+    pre .key{color:#93C5FD}
+    pre .val{color:#86EFAC}
+    pre .str{color:#FDE68A}
+    pre .comment{color:#64748B}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:64px}
+    .nav-inner{max-width:100%;margin:0 auto;display:flex;align-items:center;height:64px;padding:0 24px;gap:16px}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif}
+    .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:.88rem}
+    .nav-badge{font-size:.7rem;background:var(--blue-light);color:var(--blue-dark);padding:3px 8px;border-radius:8px;font-weight:700}
+    .nav-search{flex:1;max-width:360px;margin:0 auto}
+    .nav-search input{width:100%;padding:9px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:.84rem;font-family:inherit;outline:none;background:var(--gray-light);transition:border .2s}
+    .nav-search input:focus{border-color:var(--blue);background:white}
+    .nav-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .btn-sm{padding:7px 14px;border-radius:8px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all .2s;text-decoration:none;display:inline-block}
+    .btn-ghost{border:1.5px solid var(--border);background:none;color:var(--text)}
+    .btn-fill{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white}
+
+    /* DOCS LAYOUT */
+    .docs-layout{display:flex;padding-top:64px;min-height:100vh}
+
+    /* SIDEBAR */
+    .sidebar{width:var(--sidebar-w);flex-shrink:0;border-right:1px solid var(--border);background:var(--gray-light);padding:24px 0;position:fixed;top:64px;bottom:0;overflow-y:auto}
+    @media(max-width:900px){.sidebar{display:none}}
+    .sidebar-section{margin-bottom:6px}
+    .sidebar-title{font-size:.68rem;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;padding:6px 20px 4px}
+    .sidebar-link{display:flex;align-items:center;gap:8px;padding:7px 20px;font-size:.82rem;color:var(--gray);transition:all .2s;cursor:pointer;border-left:2px solid transparent}
+    .sidebar-link:hover{color:var(--dark);background:var(--border)}
+    .sidebar-link.active{color:var(--blue);background:var(--blue-light);border-left-color:var(--blue);font-weight:700}
+    .sidebar-link .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+    /* CONTENT */
+    .docs-content{margin-left:var(--sidebar-w);flex:1;padding:40px 52px;max-width:860px}
+    @media(max-width:900px){.docs-content{margin-left:0;padding:32px 20px}}
+    .breadcrumb{font-size:.76rem;color:var(--gray);margin-bottom:20px;display:flex;align-items:center;gap:6px}
+    .breadcrumb span{color:var(--text);font-weight:600}
+    .doc-section{margin-bottom:56px;scroll-margin-top:84px}
+    .doc-section h1{font-size:1.8rem;font-weight:900;color:var(--dark);font-family:'Poppins',sans-serif;margin-bottom:12px;line-height:1.2}
+    .doc-section h2{font-size:1.2rem;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+    .doc-section h3{font-size:1rem;font-weight:800;color:var(--dark);margin:20px 0 8px}
+    .doc-section p{font-size:.88rem;color:var(--gray);line-height:1.85;margin-bottom:12px}
+    .doc-section ul,.doc-section ol{padding-left:20px;margin-bottom:14px}
+    .doc-section li{font-size:.88rem;color:var(--gray);line-height:1.8;margin-bottom:4px}
+    .alert{padding:14px 18px;border-radius:10px;font-size:.84rem;line-height:1.7;margin:14px 0}
+    .alert.info{background:var(--blue-light);border-left:3px solid var(--blue);color:var(--dark)}
+    .alert.success{background:#DCFCE7;border-left:3px solid var(--green);color:#166534}
+    .alert.warn{background:#FEF3C7;border-left:3px solid #F59E0B;color:#92400E}
+    .steps-list{counter-reset:step;display:flex;flex-direction:column;gap:16px;margin:16px 0}
+    .step-item{display:flex;gap:14px}
+    .step-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:white;font-size:.76rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .step-body h4{font-size:.88rem;font-weight:800;color:var(--dark);margin-bottom:4px}
+    .step-body p{font-size:.82rem;color:var(--gray);line-height:1.7;margin:0}
+    .method-badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:800;font-family:'JetBrains Mono',monospace;margin-right:8px}
+    .method-badge.get{background:#DCFCE7;color:#166534}
+    .method-badge.post{background:#DBEAFE;color:#1E40AF}
+    .method-badge.delete{background:#FEE2E2;color:#991B1B}
+    .endpoint{display:flex;align-items:center;background:var(--gray-light);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--dark)}
+    .param-table{width:100%;border-collapse:collapse;margin:12px 0}
+    .param-table th{background:var(--dark);color:white;padding:9px 14px;font-size:.75rem;font-weight:700;text-align:left}
+    .param-table td{padding:9px 14px;font-size:.8rem;border-bottom:1px solid var(--border);vertical-align:top}
+    .param-table tr:last-child td{border-bottom:none}
+    .param-table .param-name{font-family:'JetBrains Mono',monospace;color:var(--blue-dark);font-weight:700}
+    .param-table .param-type{color:var(--gray);font-size:.75rem}
+    .required-badge{display:inline-block;background:#FEE2E2;color:#991B1B;font-size:.65rem;font-weight:800;padding:1px 6px;border-radius:5px;margin-left:4px}
+    .page-nav{display:flex;justify-content:space-between;padding:24px 0;border-top:1px solid var(--border);margin-top:48px}
+    .page-nav a{display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;color:var(--blue);padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;transition:all .2s}
+    .page-nav a:hover{border-color:var(--blue);background:var(--blue-light)}
+    .version-chip{display:inline-block;background:var(--blue-light);color:var(--blue-dark);font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:8px;margin-left:10px;vertical-align:middle}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark">R</div>Replify <span class="nav-badge">Docs</span></a>
+    <div class="nav-search"><input type="search" placeholder="🔍 Buscar en la documentación..."/></div>
+    <div class="nav-right">
+      <a href="index.html" class="btn-sm btn-ghost">← Inicio</a>
+      <a href="login.html" class="btn-sm btn-fill">Dashboard →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="docs-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Primeros pasos</div>
+      <a class="sidebar-link active" href="#intro"><span class="dot"></span>Introducción</a>
+      <a class="sidebar-link" href="#quickstart"><span class="dot"></span>Inicio rápido (5 min)</a>
+      <a class="sidebar-link" href="#connect-wa"><span class="dot"></span>Conectar WhatsApp</a>
+      <a class="sidebar-link" href="#first-bot"><span class="dot"></span>Configurar tu bot</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Inteligencia Artificial</div>
+      <a class="sidebar-link" href="#ai-training"><span class="dot"></span>Entrenar tu IA</a>
+      <a class="sidebar-link" href="#ai-personas"><span class="dot"></span>Personas y tono</a>
+      <a class="sidebar-link" href="#ai-flows"><span class="dot"></span>Flujos de conversación</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Funciones avanzadas</div>
+      <a class="sidebar-link" href="#campaigns"><span class="dot"></span>Campañas masivas</a>
+      <a class="sidebar-link" href="#integrations"><span class="dot"></span>Integraciones</a>
+      <a class="sidebar-link" href="#human-handoff"><span class="dot"></span>Traspaso a agente humano</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">API Reference</div>
+      <a class="sidebar-link" href="#api-auth"><span class="dot"></span>Autenticación</a>
+      <a class="sidebar-link" href="#api-messages"><span class="dot"></span>Mensajes</a>
+      <a class="sidebar-link" href="#api-contacts"><span class="dot"></span>Contactos</a>
+      <a class="sidebar-link" href="#webhooks"><span class="dot"></span>Webhooks</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Recursos</div>
+      <a class="sidebar-link" href="#changelog"><span class="dot"></span>Changelog</a>
+      <a class="sidebar-link" href="#faq-docs"><span class="dot"></span>FAQ técnico</a>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="breadcrumb">Inicio › <span>Documentación</span></div>
+
+    <!-- INTRO -->
+    <div class="doc-section" id="intro">
+      <h1>Documentación de Replify <span class="version-chip">v2.4</span></h1>
+      <p>Bienvenido a la documentación oficial de Replify. Aquí encontrarás todo lo necesario para configurar, personalizar e integrar tu bot de WhatsApp con IA: desde la configuración inicial hasta la referencia completa de la API REST.</p>
+      <div class="alert success">🚀 <strong>¿Primera vez aquí?</strong> Comienza con la guía de <a href="#quickstart" style="color:#166534;font-weight:700">Inicio rápido</a> para tener tu bot activo en 5 minutos.</div>
+      <h2>¿Qué es Replify?</h2>
+      <p>Replify es una plataforma de automatización de WhatsApp Business potenciada por inteligencia artificial. Permite a cualquier negocio crear un asistente virtual que:</p>
+      <ul>
+        <li>Responde preguntas frecuentes automáticamente, 24/7</li>
+        <li>Agenda citas y reuniones sin intervención humana</li>
+        <li>Gestiona pedidos, catálogos y pagos vía WhatsApp</li>
+        <li>Captura y califica leads automáticamente</li>
+        <li>Escala conversaciones al equipo humano cuando lo necesita</li>
+      </ul>
+    </div>
+
+    <!-- QUICKSTART -->
+    <div class="doc-section" id="quickstart">
+      <h1>Inicio rápido — 5 minutos</h1>
+      <p>Sigue estos pasos para tener tu primer bot de WhatsApp activo en menos de 5 minutos.</p>
+      <div class="steps-list">
+        <div class="step-item"><div class="step-num">1</div><div class="step-body"><h4>Crea tu cuenta</h4><p>Ve a <code>replify.ai/registro</code> e ingresa tu email y nombre de negocio. No necesitas tarjeta de crédito.</p></div></div>
+        <div class="step-item"><div class="step-num">2</div><div class="step-body"><h4>Conecta tu número de WhatsApp</h4><p>En el panel, haz clic en <strong>"Conectar WhatsApp"</strong>. Puedes usar un número nuevo o conectar tu número actual mediante la API oficial de Meta.</p></div></div>
+        <div class="step-item"><div class="step-num">3</div><div class="step-body"><h4>Entrena tu IA</h4><p>Sube un documento con información de tu negocio (PDF, DOCX o URL de tu sitio web). La IA aprende tu catálogo, precios, horarios y políticas automáticamente.</p></div></div>
+        <div class="step-item"><div class="step-num">4</div><div class="step-body"><h4>Define el tono y personalidad</h4><p>Elige un nombre para tu bot, define su estilo de comunicación (formal, amigable, profesional) y configura el mensaje de bienvenida.</p></div></div>
+        <div class="step-item"><div class="step-num">5</div><div class="step-body"><h4>Activa y prueba</h4><p>Haz clic en <strong>"Activar bot"</strong> y envía un mensaje de prueba a tu número. ¡Tu IA ya está respondiendo!</p></div></div>
+      </div>
+      <div class="alert info">💡 <strong>Tip:</strong> Cuanto más detallada sea la información que le des a la IA, mejores serán sus respuestas. Puedes actualizar el entrenamiento en cualquier momento.</div>
+    </div>
+
+    <!-- CONNECT WA -->
+    <div class="doc-section" id="connect-wa">
+      <h1>Conectar WhatsApp Business</h1>
+      <p>Replify usa la <strong>API oficial de WhatsApp Business de Meta</strong>. Esto garantiza que tu número nunca será baneado y que tienes acceso a todas las funciones avanzadas.</p>
+      <h2>Opción A: Número nuevo</h2>
+      <p>Si quieres usar un número dedicado para el bot (recomendado):</p>
+      <ol>
+        <li>Ve a <strong>Panel → Números → Agregar número</strong></li>
+        <li>Elige "Número nuevo" e ingresa el número de teléfono</li>
+        <li>Verifica con el código SMS recibido</li>
+        <li>El número queda listo en 2-5 minutos</li>
+      </ol>
+      <h2>Opción B: Tu número actual</h2>
+      <div class="alert warn">⚠️ <strong>Importante:</strong> Para migrar tu número actual a la API oficial, deberás desinstalar la app de WhatsApp Business en ese teléfono. El historial de chats anteriores no se migra.</div>
+      <ol>
+        <li>Desinstala WhatsApp Business del teléfono asociado al número</li>
+        <li>En el panel, ve a <strong>Números → Migrar número existente</strong></li>
+        <li>Ingresa el número y verifica con SMS o llamada</li>
+        <li>Configura el nombre de display y foto de perfil de tu negocio</li>
+      </ol>
+    </div>
+
+    <!-- AI TRAINING -->
+    <div class="doc-section" id="ai-training">
+      <h1>Entrenar tu Inteligencia Artificial</h1>
+      <p>La IA de Replify aprende de la información que tú le provees. Cuanto más contexto le des, más inteligentes y precisas serán sus respuestas.</p>
+      <h2>Fuentes de conocimiento</h2>
+      <p>Puedes entrenar tu IA con:</p>
+      <ul>
+        <li><strong>Documentos:</strong> PDF, DOCX, TXT con información de tu negocio</li>
+        <li><strong>URL de tu sitio web:</strong> Replify extrae automáticamente el contenido</li>
+        <li><strong>Google Sheets:</strong> Catálogos de productos, precios, inventario</li>
+        <li><strong>Preguntas y respuestas manuales:</strong> Define respuestas específicas para preguntas clave</li>
+        <li><strong>FAQ existente:</strong> Importa tu FAQ en formato CSV</li>
+      </ul>
+      <h2>Re-entrenamiento automático</h2>
+      <p>Puedes configurar que Replify re-entrene la IA automáticamente cuando detecte cambios en tu sitio web o Google Sheets. Actívalo en <strong>Panel → IA → Auto-actualización</strong>.</p>
+    </div>
+
+    <!-- INTEGRATIONS -->
+    <div class="doc-section" id="integrations">
+      <h1>Integraciones</h1>
+      <p>Conecta Replify con tus herramientas favoritas para automatizar flujos de trabajo completos.</p>
+      <h2>Integraciones nativas</h2>
+      <ul>
+        <li>📅 <strong>Google Calendar</strong> — Agenda citas automáticamente</li>
+        <li>📊 <strong>Google Sheets</strong> — Sincroniza contactos y pedidos</li>
+        <li>🛒 <strong>Shopify</strong> — Gestión de pedidos y catálogo</li>
+        <li>💼 <strong>HubSpot CRM</strong> — Captura y actualiza leads</li>
+        <li>📧 <strong>Mailchimp</strong> — Agrega contactos a listas de email</li>
+        <li>🔔 <strong>Slack</strong> — Notificaciones al equipo en tiempo real</li>
+      </ul>
+      <h2>Zapier / Make (Integromat)</h2>
+      <p>Conecta Replify con más de 5,000 aplicaciones vía Zapier o Make. Busca "Replify" en el directorio de aplicaciones de cualquiera de estas plataformas.</p>
+    </div>
+
+    <!-- API AUTH -->
+    <div class="doc-section" id="api-auth">
+      <h1>API Reference — Autenticación</h1>
+      <p>La API REST de Replify utiliza autenticación mediante <strong>Bearer Token</strong>. Obtén tu API key en <strong>Panel → Configuración → API</strong>.</p>
+      <h2>Formato de autenticación</h2>
+      <p>Incluye tu API key en el header de cada request:</p>
+      <pre><span class="comment"># Header requerido en todos los endpoints</span>
+Authorization: Bearer <span class="str">YOUR_API_KEY</span>
+Content-Type: application/json</pre>
+      <div class="alert warn">🔒 <strong>Seguridad:</strong> Nunca expongas tu API key en código del lado del cliente (JavaScript del navegador). Úsala solo en tu backend.</div>
+      <h2>Base URL</h2>
+      <div class="endpoint"><span class="method-badge get">BASE</span> https://api.replify.ai/v2</div>
+    </div>
+
+    <!-- API MESSAGES -->
+    <div class="doc-section" id="api-messages">
+      <h1>API Reference — Mensajes</h1>
+      <h2>Enviar un mensaje</h2>
+      <div class="endpoint"><span class="method-badge post">POST</span> /messages/send</div>
+      <table class="param-table">
+        <thead><tr><th>Parámetro</th><th>Tipo</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">to</span> <span class="required-badge">requerido</span></td><td><span class="param-type">string</span></td><td>Número de teléfono en formato E.164 (ej: +5215512345678)</td></tr>
+          <tr><td><span class="param-name">message</span> <span class="required-badge">requerido</span></td><td><span class="param-type">string</span></td><td>Texto del mensaje a enviar (máx. 4096 caracteres)</td></tr>
+          <tr><td><span class="param-name">from</span></td><td><span class="param-type">string</span></td><td>ID del número origen. Si solo tienes uno, es opcional.</td></tr>
+          <tr><td><span class="param-name">template_id</span></td><td><span class="param-type">string</span></td><td>ID de plantilla aprobada por Meta para mensajes fuera de ventana 24h</td></tr>
+        </tbody>
+      </table>
+      <h3>Ejemplo de request</h3>
+      <pre>{
+  <span class="key">"to"</span>: <span class="str">"+5215512345678"</span>,
+  <span class="key">"message"</span>: <span class="str">"Hola! Tu pedido #4821 ha sido enviado. 📦"</span>,
+  <span class="key">"from"</span>: <span class="str">"num_abc123"</span>
+}</pre>
+      <h3>Ejemplo de respuesta</h3>
+      <pre>{
+  <span class="key">"success"</span>: <span class="val">true</span>,
+  <span class="key">"message_id"</span>: <span class="str">"msg_7fG3kLm9"</span>,
+  <span class="key">"status"</span>: <span class="str">"sent"</span>,
+  <span class="key">"timestamp"</span>: <span class="str">"2025-05-22T14:32:10Z"</span>
+}</pre>
+      <h2>Obtener historial de conversación</h2>
+      <div class="endpoint"><span class="method-badge get">GET</span> /conversations/{contact_id}/messages</div>
+    </div>
+
+    <!-- WEBHOOKS -->
+    <div class="doc-section" id="webhooks">
+      <h1>Webhooks</h1>
+      <p>Configura webhooks para recibir notificaciones en tiempo real cuando ocurran eventos en tu cuenta Replify.</p>
+      <h2>Eventos disponibles</h2>
+      <ul>
+        <li><code>message.received</code> — Nuevo mensaje entrante</li>
+        <li><code>message.sent</code> — Mensaje enviado por el bot</li>
+        <li><code>conversation.started</code> — Nueva conversación iniciada</li>
+        <li><code>conversation.assigned</code> — Conversación asignada a agente humano</li>
+        <li><code>contact.created</code> — Nuevo contacto registrado</li>
+        <li><code>appointment.booked</code> — Cita agendada vía bot</li>
+      </ul>
+      <h2>Formato del payload</h2>
+      <pre>{
+  <span class="key">"event"</span>: <span class="str">"message.received"</span>,
+  <span class="key">"timestamp"</span>: <span class="str">"2025-05-22T14:32:10Z"</span>,
+  <span class="key">"data"</span>: {
+    <span class="key">"contact_id"</span>: <span class="str">"cnt_9xH2mK"</span>,
+    <span class="key">"phone"</span>: <span class="str">"+5215512345678"</span>,
+    <span class="key">"message"</span>: <span class="str">"Hola, ¿tienen envío a Monterrey?"</span>,
+    <span class="key">"conversation_id"</span>: <span class="str">"conv_3kLm7P"</span>
+  }
+}</pre>
+      <div class="alert info">🔐 <strong>Validación de firma:</strong> Cada webhook incluye el header <code>X-Replify-Signature</code> con un HMAC-SHA256 de tu payload firmado con tu webhook secret. Valídalo siempre antes de procesar.</div>
+    </div>
+
+    <!-- CHANGELOG -->
+    <div class="doc-section" id="changelog">
+      <h1>Changelog</h1>
+      <h2>v2.4 — Mayo 2025</h2>
+      <ul>
+        <li>✨ Nueva función: Campañas masivas con segmentación avanzada</li>
+        <li>✨ Integración nativa con HubSpot CRM</li>
+        <li>⚡ Mejora de velocidad de respuesta IA en 40%</li>
+        <li>🐛 Corrección: Caracteres especiales en mensajes de plantilla</li>
+      </ul>
+      <h2>v2.3 — Marzo 2025</h2>
+      <ul>
+        <li>✨ Soporte multiidioma automático (detección de idioma)</li>
+        <li>✨ Nuevo dashboard de analytics con embudos de conversión</li>
+        <li>⚡ API v2 con latencia reducida y nuevos endpoints</li>
+      </ul>
+    </div>
+
+    <div class="page-nav">
+      <a href="index.html">← Volver al inicio</a>
+      <a href="login.html">Ir al dashboard →</a>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
